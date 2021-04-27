@@ -2,7 +2,11 @@ Projeto para matéria de Multimídia (SCC0561) para o curso de Ciências de Comp
 
 O sistema faz uma leitura de uma imagem `.bmp` e cria dois arquivos `.bmp`:
 - Um arquivo exatamente igual ao original com o nome adicionado de `_copy`.
-- Um arquivo com o nome adicionado de `_processed` que, para cada pixel da imagem, coloca a intensidade da coloração *red* em *blue* e da coloração *blue* em *red*.
+- Um arquivo com a imagem processada com o nome adicionado de `_processed`.
+
+Os processamentos que podem ser realizados, ou seja, as operações, são:
+1. Para cada pixel da imagem, coloca a intensidade da coloração *red* em *blue* e da coloração *blue* em *red*.
+2. Para cada pixel da imagem, se mais de dois canais de cores tem uma intesidade maior que 127, o pixel tem todos os canais substituidos para o valor 255 (preto), caso contrário, todos os canais são substituidos para o valor 0 (branco).
 
 Considerações:
 - O `.bmp` deve ter BitsPerPixel = 24, pois a struct que representa um pixel utiliza 3 `unsigned char` (ou seja, 8 bits) para cada coloração.
@@ -12,14 +16,14 @@ Primeiro é necessário compilar os arquivos com o comando:
 ```
 make
 ```
-Em seguida, basta executar passando o nome do arquivo `.bmp` que será lido sem extensão:
+Em seguida, basta executar passando o nome do arquivo `.bmp` que será lido sem extensão e a operação:
 ```
-./main nome_do_arquivo
+./main nome_do_arquivo [operacao]
 ```
 Exemplo:
 ```
 make
-./main colors
+./main lenna 2 
 ```
 
 ## Referências

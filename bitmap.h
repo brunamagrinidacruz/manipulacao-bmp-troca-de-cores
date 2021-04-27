@@ -52,6 +52,8 @@ void write_pixel(FILE* file, BITMAPIXEL pixel);
 BITMAPIXEL* read_pixels(FILE* file, int width, int height);
 void write_pixels(FILE* file, BITMAPIXEL *pixels, int width, int height);
 void print_pixels(BITMAPIXEL *pixels, int width, int height);
+
 BITMAPIXEL* swap_b_r(BITMAPIXEL *pixels, int width, int height);
+BITMAPIXEL* black_and_white(BITMAPIXEL *pixels, int width, int height);
 
 #endif

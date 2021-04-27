@@ -97,3 +97,29 @@ BITMAPIXEL* swap_b_r(BITMAPIXEL *pixels, int width, int height) {
     free(temp);
     return pixels_processed;
 }
+
+BITMAPIXEL* black_and_white(BITMAPIXEL *pixels, int width, int height) {
+    BITMAPIXEL *pixels_processed = (BITMAPIXEL *) malloc(width * height * sizeof(BITMAPIXEL));
+    int strengh_colors;
+    for(int i = 0; i < width*height; i++) {
+        strengh_colors = 0;
+
+        if(pixels[i].blue > 127)
+            strengh_colors++;
+        if(pixels[i].green > 127)
+            strengh_colors++;
+        if(pixels[i].red > 127)
+            strengh_colors++;
+
+        if(strengh_colors >= 2) {
+            pixels_processed[i].blue = 255;
+            pixels_processed[i].green = 255;
+            pixels_processed[i].red = 255;
+        } else {
+            pixels_processed[i].blue = 0;
+            pixels_processed[i].green = 0;
+            pixels_processed[i].red = 0;
+        }
+    }
+    return pixels_processed;
+}

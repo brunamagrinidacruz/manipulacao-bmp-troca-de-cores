@@ -6,11 +6,18 @@
 #define MAX_SIZE_FILE_NAME 20
 
 int main(int argc, char **argv) {
+    int operation = atoi(argv[2]);
     char file_name[MAX_SIZE_FILE_NAME];
     char file_name_processed[MAX_SIZE_FILE_NAME];
     char file_name_copy[MAX_SIZE_FILE_NAME];
 
-    if(argc != 2) {
+    if(argc != 3) {
+        printf("The args are incorrect.\n");
+        exit(1);
+    }
+
+    if(operation > 2) {
+        printf("The operation is not valid.\n");
         exit(1);
     }
 
@@ -36,16 +43,26 @@ int main(int argc, char **argv) {
 
     // print_pixels(pixels, info_header.width, info_header.height);
     
-    pixels_processed = swap_b_r(pixels, info_header.width, info_header.height);
-    write_file_header(file_processed, file_header);
-    write_info_header(file_processed, info_header);
-    write_pixels(file_processed, pixels_processed, info_header.width, info_header.height);
-
     write_file_header(file_copy, file_header);
     write_info_header(file_copy, info_header);
     write_pixels(file_copy, pixels, info_header.width, info_header.height);
 
+    switch(operation) {
+        case 1: 
+            printf("Swapping channels Blue and Red.\n");
+            pixels_processed = swap_b_r(pixels, info_header.width, info_header.height);
+        break;
+        case 2:
+            printf("Transforming colors in black or white.\n");
+            pixels_processed = black_and_white(pixels, info_header.width, info_header.height);
+        break;
+    }
+    write_file_header(file_processed, file_header);
+    write_info_header(file_processed, info_header);
+    write_pixels(file_processed, pixels_processed, info_header.width, info_header.height);
+
     free(pixels);
+    free(pixels_processed);
     fclose(file);
     fclose(file_processed);
     fclose(file_copy);
